@@ -9,8 +9,18 @@ function soloNumeros(array) {
   // soloNumeros([1, 'Henry', 2]) debe retornar [1, 2]
 
   // Tu código aca:
+  
+  var soloenteros = [];
+  for (var i = 0; i < array.length; i++) {
+    if (typeof(array[i])=="number") { 
+//       soloenteros[i] = array[i];
+       soloenteros.push(array[i]);
+    }; 
+  }
+ return soloenteros;
+}  
 
-}
+
 
 function sumaTodos(array) {
   // La funcion llamada 'sumaTodos' recibe como argumento un array con dos numeros
@@ -20,8 +30,17 @@ function sumaTodos(array) {
   // Nota: Los numeros estan ordenados de menor a mayor.
 
   // Tu código aca:
-  
-}
+     var inicio = array[0]
+     var fin = array[1]
+      var suma = 0
+
+  for (let i = inicio; i <= fin; i++){
+    suma += i;
+
+  }
+  return suma  
+} 
+
 
 function checkInventario(inventario, item) {
   // La funcion 'checkInventario' recibe como argumento un array de objetos llamado 'inventario' y el nombre de un item llamado 'item'
@@ -42,7 +61,21 @@ function checkInventario(inventario, item) {
   // checkInventario(inventario, 'tenedor') devuelve => 6
 
   // Tu código aca:
-  
+   {
+    return inventario.find((e)=> e.nombre === item )?.cantidad || 0;
+}
+
+var inventario = [
+   {    nombre: 'tenedor',
+       cantidad: 6
+     },
+    {
+       nombre: 'cuchara',
+       cantidad: 4,
+     },
+];
+console.log(checkInventario(inventario, 'tenedor')); //6
+console.log(checkInventario(inventario, 'vaso')); //0
 }
 
 function numeroSimetrico(num) {
@@ -53,7 +86,14 @@ function numeroSimetrico(num) {
   // numeroSimetrico(11711) devuelve true
 
   // Tu código:
+   const num1 = 11711;
+   const num2 = 12711;
+  {
+  return ""+num === (""+num).split("").reverse().join("")
+}
 
+console.log(numeroSimetrico(num1))
+console.log(numeroSimetrico(num2))
 }
 
 function index() {
@@ -70,19 +110,28 @@ function index() {
   // numeros.encontraIndex(23) debe devolver -1 ya que ese elemento no existe en ese array.
 
   // Tu código aca:
-
-};
-
-
+  Array.prototype.encontraIndex = function(num) {
+  for(let i = 0; i < this.length; i++){
+    if(this[i] === num) {
+      return i
+    }
+  }
+  return -1
+}
+}
 
 function crearClasePersona() {
   // Crear una clase para construir objeto de tipo Persona.
   // el constructor debe recibir:
   // nombre (string) , edad (integer) , hobbies (array de strings) , amigos (array de objetos)
   // Esta funcion debe retonar la clase Persona.
-
+        
   class Persona {
-    constructor() {
+    constructor(nombre, edad, hobbies, amigos) {
+      this.nombre = nombre
+        this.edad = edad
+        this.hobbies = hobbies
+        this.amigos= amigos
 
     }
 
@@ -90,27 +139,32 @@ function crearClasePersona() {
       // el metodo addFriend recibe un string nombre y un entero edad y debe agregar un objeto:
       // { nombre: nombre, edad: edad} al arreglo de amigos de la persona.
       // no debe retornar nada.
-      
+    
+         let amigo = { nombre, edad }
+    this.amigos.push(amigo)
+    
+  
     }
 
     addHobby(hobby) {
       // este método debe agregar un hobby (hobby) al arreglo de hobbies de la persona.
       // no debe retornar nada.
-
+       this.hobbies.push(hobby);
     }
     getFriends() {
       // Escribe una función que retorne un arreglo con sólo los nombres del arreglo de amigos
       // de la persona.
       // Ej:
-      // persona.getFriends() // retorna ['toni', 'Leo', 'Manu']
-
-    }
-
+      //  // retorna ['toni', 'Leo', 'Manu']
+     return this.amigos.map(amigo => amigo.nombre)
+  }
     getHobbies() {
       // Escribe una función que retorne un arreglo con los hobbies de la persona
       // Ej:
       // persona.getHobbies() // retorna ['correr', 'dormir', 'nadar']
 
+      return this.hobbies.map(hobbies => hobbies)
+ 
     }
 
     getPromedioEdad() {
@@ -118,7 +172,7 @@ function crearClasePersona() {
       // ej, si la persona tuviera estos amigos:
       // {
       //   amigos: [{
-      //     nombre: 'toni',
+      //     nombre: 'toni',++++
       //     edad: 33,
       //   }, {
       //     nombre: 'Emi',
@@ -126,13 +180,24 @@ function crearClasePersona() {
       //   }]
       // }
       // persona.getPromedioEdad() // retorna 29
+       var edad= 0
+      for(let i =0; i<this.amigos.length; i++) {
 
+        edad += this.amigos[i].edad
+
+      }
+
+      var cantidad = this.amigos.length
+
+      var promedio= edad/cantidad;
+      
+      return promedio 
     }
-
-  };
-
+  }
   return Persona;
 }
+
+
 
 function cuantosRepetidos(array, elemento) {
   // La funcion llamada 'cuantosRepetidos' recibe como argumento un array de arrays llamado 'array' y un string llamado 'elemento'
@@ -144,7 +209,20 @@ function cuantosRepetidos(array, elemento) {
   // Nota: Podes usar for loops anidados.
 
   // Tu código aca:
-
+arr = [['manzana', 'naranja'],['sandia', 'pera'],['uva', 'manzana']];
+ {//Aquí le llamo elemento
+    var contador = 0;
+    for (var i = 0; i < array.length; i++) {
+        for(item of array[i]){/*Aquí le llamo item para no pisar la variable,
+ además hago el loop sobre array[i]!*/
+            if(item === elemento){
+                contador++;
+            }
+        }
+    }
+    return contador;
+}
+console.log(cuantosRepetidos(arr, 'manzana'));
 }
 
 // No modifiques nada debajo de esta linea
